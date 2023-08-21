@@ -1,5 +1,7 @@
 img="";
 status="";
+objects=[];
+go = "";
 
 function preload()
 {
@@ -29,9 +31,36 @@ function gotResult(error, results)
     }
 
     console.log(results);
+    objects= results;
 }
 
 function draw()
 {
-    image(img, 0, 0, 640, 420); 
+    image(img, 0, 0, 640, 420);
+    
+    if(status != "")
+    {
+        for(i=0; i<objects.length; i++) 
+        {
+            document.getElementById("status").innerHTML = "Status : Object/s Detected";
+
+            fill("#FF0000");    
+            percent = floor(objects[i].confidence * 100);
+            text(objects[i].label + " - " + percent + "% accuracy", objects[i].x + 15, objects[i].y + 15);
+            noFill();
+            stroke("#FF0000");
+            rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);     
+            go=true;       
+        }
+    }    
+
+    if(go=true)
+    {
+        document.getElementById("number_of_objects").innerHTML = "The COCOSSD model detected " + objects.length + " out of 3 objects";
+    }
+
+    else
+    {
+        document.getElementById("number_of_objects").innerHTML = "The COCOSSD model has failed to detect any objects";
+    }
 }

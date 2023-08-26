@@ -5,7 +5,7 @@ go = "";
 
 function preload()
 {
-    img=loadImage("headphones.webp");
+    img=loadImage("clock.jpeg");
 }
 
 function setup()
@@ -56,7 +56,7 @@ function draw()
 
     if(go=true)
     {
-        document.getElementById("number_of_objects").innerHTML = "The COCOSSD model detected " + objects.length + " out of 2 objects";
+        document.getElementById("number_of_objects").innerHTML = "The COCOSSD model detected " + objects.length + " out of 1 object";
     }
 
     else
